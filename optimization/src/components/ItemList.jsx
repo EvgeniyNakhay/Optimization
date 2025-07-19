@@ -1,8 +1,12 @@
-export default function ItemList(itemslist) {
+export default function ItemList({ array }) {
   return (
     <ul>
-      {itemslist.map((item, index) => {
-        <li key={index}>{item}</li>;
+      {array.map((item) => {
+        return (
+          <div key={item.id}>
+            <li>{item.title}</li>
+          </div>
+        );
       })}
     </ul>
   );

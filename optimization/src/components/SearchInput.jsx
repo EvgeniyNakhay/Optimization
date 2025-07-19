@@ -1,8 +1,18 @@
 import { useState } from "react";
 
-export default function SearchInput({ inputValue }) {
-  function handleInputChange(event) {
-    setInputValue(event.target.value);
+export default function SearchInput({ onSearch }) {
+  const [inputValue, setInputValue] = useState("");
+
+  function handleInputChange(e) {
+    const newSearchTerm = e.target.value;
+    setInputValue(newSearchTerm);
+    onSearch(newSearchTerm);
   }
-  return <input type="text" value={inputValue} onChange={handleInputChange} />;
+  return (
+    <input
+      type="text"
+      value={inputValue}
+      onChange={(e) => handleInputChange(e)}
+    />
+  );
 }
