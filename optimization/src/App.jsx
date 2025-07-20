@@ -8,6 +8,7 @@ import CounterButton from "./components/CounterButton";
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [itemslist, setItemsList] = useState(null);
+  const [count, setSount] = useState(0);
 
   const listItems = [
     {
@@ -48,14 +49,22 @@ function App() {
     },
   ];
 
-  const handleSearch = useCallback((newSearchTerm) => {
-    setSearchQuery(newSearchTerm);
-    console.log("отработал handleSearch");
-  }, []);
+  const handleSearch = useCallback(
+    (newSearchTerm) => {
+      setSearchQuery(newSearchTerm);
+      console.log("отработал handleSearch");
+    },
+    [searchQuery]
+  );
+
+  const increaseCount = useCallback(() => {
+    setSount((count) => count + 1);
+    console.log("отработал increaseCount");
+  }, [count]);
 
   return (
     <>
-      <CounterButton />
+      <CounterButton count={count} increaseCount={increaseCount} />
       <SearchInput onSearch={handleSearch} />
       <ItemList listItems={listItems} searchQuery={searchQuery} />
     </>
