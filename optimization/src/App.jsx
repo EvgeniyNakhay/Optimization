@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
+import { useMemo } from "react";
 import "./App.css";
 import SearchInput from "./components/SearchInput";
 import ItemList from "./components/ItemList";
@@ -39,17 +40,24 @@ function App() {
       title: "laboriosam mollitia et enim quasi adipisci quia provident illum",
       completed: false,
     },
+    {
+      userId: 1,
+      id: 6,
+      title: "laboriosam13",
+      completed: false,
+    },
   ];
 
-  function handleSearch(newSearchTerm) {
+  const handleSearch = useCallback((newSearchTerm) => {
     setSearchQuery(newSearchTerm);
-  }
+    console.log("отработал handleSearch");
+  }, []);
 
   return (
     <>
       <CounterButton />
       <SearchInput onSearch={handleSearch} />
-      <ItemList array={listItems} />
+      <ItemList listItems={listItems} searchQuery={searchQuery} />
     </>
   );
 }
